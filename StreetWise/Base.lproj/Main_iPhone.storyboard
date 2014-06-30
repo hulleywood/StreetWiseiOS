@@ -34,11 +34,11 @@
                                     <segue destination="kIf-nA-PKG" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="ZEO-Qe-X3j"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efr-g6-IOA">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efr-g6-IOA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-n6-lIV">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-n6-lIV">
                                         <rect key="frame" x="232" y="20" width="68" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -62,7 +62,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Destination" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Destination" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
                                         <rect key="frame" x="20" y="58" width="204" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -74,8 +74,15 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="eV6-Ev-yzK" firstAttribute="top" secondItem="4yL-Gq-bJP" secondAttribute="bottom" constant="8" id="Aep-S2-eu4"/>
+                                    <constraint firstItem="Uoe-n6-lIV" firstAttribute="top" secondItem="efr-g6-IOA" secondAttribute="top" constant="20" id="GYw-C4-NXc"/>
+                                    <constraint firstAttribute="width" constant="320" id="IfI-g0-FLn"/>
+                                    <constraint firstItem="eV6-Ev-yzK" firstAttribute="leading" secondItem="efr-g6-IOA" secondAttribute="leading" constant="20" id="Qnd-QL-gaS"/>
                                     <constraint firstItem="4yL-Gq-bJP" firstAttribute="leading" secondItem="efr-g6-IOA" secondAttribute="leading" constant="20" id="Zqc-R9-e3b"/>
                                     <constraint firstItem="4yL-Gq-bJP" firstAttribute="top" secondItem="efr-g6-IOA" secondAttribute="top" constant="20" id="bHh-pi-8Ru"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uoe-n6-lIV" secondAttribute="bottom" constant="12" id="g12-Kx-c0g"/>
+                                    <constraint firstAttribute="height" constant="100" id="q7I-FJ-eHv"/>
+                                    <constraint firstItem="Uoe-n6-lIV" firstAttribute="leading" secondItem="eV6-Ev-yzK" secondAttribute="trailing" constant="8" id="yK9-2W-otm"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q2O-Ym-zxa">
@@ -94,9 +101,12 @@
                             <constraint firstAttribute="trailing" secondItem="jqg-sy-dxO" secondAttribute="trailing" constant="20" symbolic="YES" id="1ym-A3-aKq"/>
                             <constraint firstItem="ycB-9Z-8Ca" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="P2M-Nd-gu3"/>
                             <constraint firstItem="c4s-Xn-x5B" firstAttribute="top" secondItem="ycB-9Z-8Ca" secondAttribute="bottom" id="P94-Ex-que"/>
+                            <constraint firstItem="efr-g6-IOA" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="QHf-nM-bgx"/>
                             <constraint firstAttribute="bottom" secondItem="jqg-sy-dxO" secondAttribute="bottom" constant="20" symbolic="YES" id="Uf2-YL-3zF"/>
+                            <constraint firstAttribute="trailing" secondItem="efr-g6-IOA" secondAttribute="trailing" id="XS2-Zo-xIP"/>
                             <constraint firstAttribute="trailing" secondItem="ycB-9Z-8Ca" secondAttribute="trailing" id="hLU-OH-6Ct"/>
                             <constraint firstItem="ycB-9Z-8Ca" firstAttribute="top" secondItem="l9E-07-oys" secondAttribute="top" id="vI4-xL-SXf"/>
+                            <constraint firstItem="efr-g6-IOA" firstAttribute="top" secondItem="l9E-07-oys" secondAttribute="top" id="wYT-hz-9vP"/>
                         </constraints>
                     </view>
                     <connections>

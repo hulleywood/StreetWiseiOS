@@ -136,12 +136,12 @@
 				A245A1061960FFBF007E7C35 /* Main_iPad.storyboard */,
 				A245A1091960FFBF007E7C35 /* JHMainViewController.h */,
 				A245A10A1960FFBF007E7C35 /* JHMainViewController.m */,
+				A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */,
+				A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */,
 				A245A10C1960FFBF007E7C35 /* JHFlipsideViewController.h */,
 				A245A10D1960FFBF007E7C35 /* JHFlipsideViewController.m */,
 				A245A10F1960FFBF007E7C35 /* Images.xcassets */,
 				A245A0F81960FFBF007E7C35 /* Supporting Files */,
-				A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */,
-				A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */,
 			);
 			path = StreetWise;
 			sourceTree = "<group>";
