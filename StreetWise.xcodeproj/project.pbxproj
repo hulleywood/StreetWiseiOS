@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C232D4AAAC441AAAE330C52 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD61D7D3131A4CC1B17ACF54 /* libPods.a */; };
+		A22EDE7D19621B800097E285 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A22EDE7C19621B800097E285 /* MBProgressHUD.m */; };
+		A242BDE419612FD5008362E4 /* JHDirectionSearchResults.m in Sources */ = {isa = PBXBuildFile; fileRef = A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */; };
 		A245A0F21960FFBF007E7C35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F11960FFBF007E7C35 /* Foundation.framework */; };
 		A245A0F41960FFBF007E7C35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F31960FFBF007E7C35 /* CoreGraphics.framework */; };
 		A245A0F61960FFBF007E7C35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F51960FFBF007E7C35 /* UIKit.framework */; };
@@ -23,6 +26,9 @@
 		A245A1191960FFBF007E7C35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F51960FFBF007E7C35 /* UIKit.framework */; };
 		A245A1211960FFBF007E7C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A245A11F1960FFBF007E7C35 /* InfoPlist.strings */; };
 		A245A1231960FFBF007E7C35 /* StreetWiseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A245A1221960FFBF007E7C35 /* StreetWiseTests.m */; };
+		A245A12D1961012D007E7C35 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A12C1961012D007E7C35 /* MapKit.framework */; };
+		A2A18A311961F49900C3E905 /* JHLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A18A301961F49900C3E905 /* JHLocation.m */; };
+		A2A18A331961F73A00C3E905 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A18A321961F73A00C3E905 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41F94957D336489DADFDD09B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		A22EDE7B19621B800097E285 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A22EDE7C19621B800097E285 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHDirectionSearchResults.h; sourceTree = "<group>"; };
+		A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHDirectionSearchResults.m; sourceTree = "<group>"; };
 		A245A0EE1960FFBF007E7C35 /* StreetWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreetWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A245A0F11960FFBF007E7C35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A245A0F31960FFBF007E7C35 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,6 +69,11 @@
 		A245A11E1960FFBF007E7C35 /* StreetWiseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StreetWiseTests-Info.plist"; sourceTree = "<group>"; };
 		A245A1201960FFBF007E7C35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A245A1221960FFBF007E7C35 /* StreetWiseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreetWiseTests.m; sourceTree = "<group>"; };
+		A245A12C1961012D007E7C35 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A2A18A2F1961F49900C3E905 /* JHLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHLocation.h; sourceTree = "<group>"; };
+		A2A18A301961F49900C3E905 /* JHLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHLocation.m; sourceTree = "<group>"; };
+		A2A18A321961F73A00C3E905 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CD61D7D3131A4CC1B17ACF54 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +81,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A18A331961F73A00C3E905 /* AddressBook.framework in Frameworks */,
+				A245A12D1961012D007E7C35 /* MapKit.framework in Frameworks */,
 				A245A0F41960FFBF007E7C35 /* CoreGraphics.framework in Frameworks */,
 				A245A0F61960FFBF007E7C35 /* UIKit.framework in Frameworks */,
 				A245A0F21960FFBF007E7C35 /* Foundation.framework in Frameworks */,
+				7C232D4AAAC441AAAE330C52 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,13 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A22EDE7A19621B6C0097E285 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A22EDE7B19621B800097E285 /* MBProgressHUD.h */,
+				A22EDE7C19621B800097E285 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		A245A0E51960FFBF007E7C35 = {
 			isa = PBXGroup;
 			children = (
+				A22EDE7A19621B6C0097E285 /* MBProgressHUD */,
 				A245A0F71960FFBF007E7C35 /* StreetWise */,
 				A245A11C1960FFBF007E7C35 /* StreetWiseTests */,
 				A245A0F01960FFBF007E7C35 /* Frameworks */,
 				A245A0EF1960FFBF007E7C35 /* Products */,
+				41F94957D336489DADFDD09B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,10 +136,13 @@
 		A245A0F01960FFBF007E7C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2A18A321961F73A00C3E905 /* AddressBook.framework */,
+				A245A12C1961012D007E7C35 /* MapKit.framework */,
 				A245A0F11960FFBF007E7C35 /* Foundation.framework */,
 				A245A0F31960FFBF007E7C35 /* CoreGraphics.framework */,
 				A245A0F51960FFBF007E7C35 /* UIKit.framework */,
 				A245A1161960FFBF007E7C35 /* XCTest.framework */,
+				CD61D7D3131A4CC1B17ACF54 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,14 +152,18 @@
 			children = (
 				A245A1001960FFBF007E7C35 /* JHAppDelegate.h */,
 				A245A1011960FFBF007E7C35 /* JHAppDelegate.m */,
-				A245A1031960FFBF007E7C35 /* Main_iPhone.storyboard */,
-				A245A1061960FFBF007E7C35 /* Main_iPad.storyboard */,
-				A245A1091960FFBF007E7C35 /* JHMainViewController.h */,
-				A245A10A1960FFBF007E7C35 /* JHMainViewController.m */,
 				A245A10C1960FFBF007E7C35 /* JHFlipsideViewController.h */,
 				A245A10D1960FFBF007E7C35 /* JHFlipsideViewController.m */,
 				A245A10F1960FFBF007E7C35 /* Images.xcassets */,
 				A245A0F81960FFBF007E7C35 /* Supporting Files */,
+				A245A1031960FFBF007E7C35 /* Main_iPhone.storyboard */,
+				A245A1061960FFBF007E7C35 /* Main_iPad.storyboard */,
+				A245A1091960FFBF007E7C35 /* JHMainViewController.h */,
+				A245A10A1960FFBF007E7C35 /* JHMainViewController.m */,
+				A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */,
+				A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */,
+				A2A18A2F1961F49900C3E905 /* JHLocation.h */,
+				A2A18A301961F49900C3E905 /* JHLocation.m */,
 			);
 			path = StreetWise;
 			sourceTree = "<group>";
@@ -167,9 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A245A1261960FFBF007E7C35 /* Build configuration list for PBXNativeTarget "StreetWise" */;
 			buildPhases = (
+				0AE586915F8C4DF18EDDE864 /* Check Pods Manifest.lock */,
 				A245A0EA1960FFBF007E7C35 /* Sources */,
 				A245A0EB1960FFBF007E7C35 /* Frameworks */,
 				A245A0EC1960FFBF007E7C35 /* Resources */,
+				66181C10A0EE4CF69B399473 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,15 +293,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0AE586915F8C4DF18EDDE864 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66181C10A0EE4CF69B399473 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A245A0EA1960FFBF007E7C35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A18A311961F49900C3E905 /* JHLocation.m in Sources */,
 				A245A1021960FFBF007E7C35 /* JHAppDelegate.m in Sources */,
 				A245A10B1960FFBF007E7C35 /* JHMainViewController.m in Sources */,
 				A245A10E1960FFBF007E7C35 /* JHFlipsideViewController.m in Sources */,
+				A242BDE419612FD5008362E4 /* JHDirectionSearchResults.m in Sources */,
 				A245A0FE1960FFBF007E7C35 /* main.m in Sources */,
+				A22EDE7D19621B800097E285 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,12 +469,14 @@
 		};
 		A245A1271960FFBF007E7C35 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41F94957D336489DADFDD09B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StreetWise/StreetWise-Prefix.pch";
 				INFOPLIST_FILE = "StreetWise/StreetWise-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -407,12 +484,14 @@
 		};
 		A245A1281960FFBF007E7C35 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41F94957D336489DADFDD09B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StreetWise/StreetWise-Prefix.pch";
 				INFOPLIST_FILE = "StreetWise/StreetWise-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -477,6 +556,7 @@
 				A245A1281960FFBF007E7C35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A245A1291960FFBF007E7C35 /* Build configuration list for PBXNativeTarget "StreetWiseTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +565,7 @@
 				A245A12B1960FFBF007E7C35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
