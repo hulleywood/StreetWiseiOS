@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7C232D4AAAC441AAAE330C52 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD61D7D3131A4CC1B17ACF54 /* libPods.a */; };
+		A22EDE7D19621B800097E285 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A22EDE7C19621B800097E285 /* MBProgressHUD.m */; };
 		A242BDE419612FD5008362E4 /* JHDirectionSearchResults.m in Sources */ = {isa = PBXBuildFile; fileRef = A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */; };
 		A245A0F21960FFBF007E7C35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F11960FFBF007E7C35 /* Foundation.framework */; };
 		A245A0F41960FFBF007E7C35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A0F31960FFBF007E7C35 /* CoreGraphics.framework */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		41F94957D336489DADFDD09B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		A22EDE7B19621B800097E285 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A22EDE7C19621B800097E285 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHDirectionSearchResults.h; sourceTree = "<group>"; };
 		A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHDirectionSearchResults.m; sourceTree = "<group>"; };
 		A245A0EE1960FFBF007E7C35 /* StreetWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreetWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,9 +103,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A22EDE7A19621B6C0097E285 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A22EDE7B19621B800097E285 /* MBProgressHUD.h */,
+				A22EDE7C19621B800097E285 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		A245A0E51960FFBF007E7C35 = {
 			isa = PBXGroup;
 			children = (
+				A22EDE7A19621B6C0097E285 /* MBProgressHUD */,
 				A245A0F71960FFBF007E7C35 /* StreetWise */,
 				A245A11C1960FFBF007E7C35 /* StreetWiseTests */,
 				A245A0F01960FFBF007E7C35 /* Frameworks */,
@@ -324,6 +337,7 @@
 				A245A10E1960FFBF007E7C35 /* JHFlipsideViewController.m in Sources */,
 				A242BDE419612FD5008362E4 /* JHDirectionSearchResults.m in Sources */,
 				A245A0FE1960FFBF007E7C35 /* main.m in Sources */,
+				A22EDE7D19621B800097E285 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

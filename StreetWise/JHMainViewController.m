@@ -8,6 +8,7 @@
 
 #import "JHMainViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "MBProgressHUD.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -21,7 +22,8 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
-//    [_mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
+//    self.originField.delegate = self;
+//    self.destinationField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,35 +50,46 @@
 }
 
 - (IBAction)getSearchResults:(id)sender {
+    NSString *url = @"http://streetwise.herokuapp.com/directions/:id";
     //    MKCoordinateRegion mapRegion = [_mapView region];
     //    CLLocationCoordinate2D centerLocation = mapRegion.center;
     
-    NSString *url = @"http://streetwise.herokuapp.com/directions/:id";
+    NSString *origin = self.originField.text;
+    NSString *destination = self.destinationField.text;
+   
+    if ([origin length] != 0 && [destination length] != 0) {
+        [self.originField resignFirstResponder];
+        [self.destinationField resignFirstResponder];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading paths...";
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameters = @{ @"origin": @"1502 hyde st, san francisco",
-                                  @"destination": @"633 folsom st, san francisco" };
-    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError *e = nil;
-        NSDictionary* json = [NSJSONSerialization
+        NSDictionary *parameters = @{ @"origin": origin,
+                                  @"destination": destination };
+        [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSError *e = nil;
+            NSDictionary* json = [NSJSONSerialization
                               JSONObjectWithData:responseObject
                               options:0
                               error:&e ];
-//        NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        NSLog(@"Response: %@", json);
-        [self initiateSearchResultsFromResponse:json];
-        [self renderSearchResults];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [self renderError:error];
-    }];
+            [self processSearchResultsFromResponse:json];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self renderError:error];
+        }];
+    } else {
+        NSString *e = @"At least one of your endpoints is blank";
+        [self renderErrorText:e];
+    }
 }
 
-- (void)initiateSearchResultsFromResponse:(NSDictionary *)responseJSON
+- (void)processSearchResultsFromResponse:(NSDictionary *)responseJSON
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
+    [self renderSearchResults];
     NSLog(@"Origin: %@", self.searchResults.origin.subtitle);
     NSLog(@"Destination: %@", self.searchResults.destination.subtitle);
 }
@@ -85,8 +98,17 @@
 
 - (void)renderSearchResults
 {
+    [self clearMapOverlays];
     [self renderEndPoints];
-    [self renderPathsOnMap];
+    [self renderPathOnMap:self.searchResults.paths[0]];
+    [self resizeMapViewForResults];
+    [self displayPathSlider];
+}
+
+- (void)clearMapOverlays
+{
+    [self.mapView removeAnnotations:[self.mapView annotations]];
+    [self.mapView removeOverlays:self.mapView.overlays];
 }
 
 - (void)renderEndPoints
@@ -95,14 +117,43 @@
     [_mapView addAnnotation:self.searchResults.destination];
 }
 
-- (void)renderPathsOnMap
+- (void)renderPathOnMap:(MKPolyline *)path
 {
-    [_mapView addOverlays:self.searchResults.paths level:MKOverlayLevelAboveRoads];
+    [_mapView addOverlay:path level:MKOverlayLevelAboveRoads];
 }
 
 - (void)renderError:(NSError *)error
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
+    NSString *userInfo = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+    NSString *errorText;
+    
+    if ([userInfo rangeOfString:@"422"].location != NSNotFound) {
+        errorText = @"Make sure both of your endpoints are within San Francisco and try again";
+    } else if ([userInfo rangeOfString:@"500"].location != NSNotFound) {
+        errorText = @"We're performing maintenance on our servers, please try again soon";
+    } else {
+        errorText = @"An unknown error occured, please try again";
+    }
+    
+    [self renderErrorText:errorText];
+    
+}
+
+- (void)resizeMapViewForResults
+{
+    
+}
+
+- (void)renderErrorText:(NSString *)error
+{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                       message:error
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
@@ -113,6 +164,11 @@
     renderer.strokeColor = mapOverlayColor;
     renderer.lineWidth = 13.0;
     return renderer;
+}
+
+- (void)displayPathSlider
+{
+    
 }
 
 #pragma mark - Flipside View Controller
