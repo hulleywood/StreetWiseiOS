@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rQl-PL-IFJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rQl-PL-IFJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier Main View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="rV5-Y2-ghB">
             <objects>
                 <viewController id="rQl-PL-IFJ" customClass="JHMainViewController" sceneMemberID="viewController">
@@ -30,11 +30,58 @@
                                     <segue destination="kIf-nA-PKG" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="ZEO-Qe-X3j"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-n6-lIV">
+                                <rect key="frame" x="232" y="20" width="68" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="4TT-rW-tAP"/>
+                                    <constraint firstAttribute="height" constant="68" id="BIU-X2-kQH"/>
+                                </constraints>
+                                <state key="normal" title="Search">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4yL-Gq-bJP">
+                                <rect key="frame" x="20" y="20" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9mn-6T-FRj"/>
+                                    <constraint firstAttribute="width" constant="204" id="yXq-dg-llz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
+                                <rect key="frame" x="20" y="58" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="204" id="3Oe-wM-td8"/>
+                                    <constraint firstAttribute="height" constant="30" id="yHU-RT-Y1W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ycB-9Z-8Ca">
+                                <rect key="frame" x="0.0" y="96" width="320" height="472"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jqg-sy-dxO" secondAttribute="trailing" constant="20" symbolic="YES" id="1ym-A3-aKq"/>
+                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="28D-AB-xRG"/>
+                            <constraint firstItem="4yL-Gq-bJP" firstAttribute="top" secondItem="bfD-tQ-IfD" secondAttribute="bottom" id="6kg-fL-lDv"/>
+                            <constraint firstAttribute="trailing" secondItem="ycB-9Z-8Ca" secondAttribute="trailing" id="Cb8-YC-1ZY"/>
+                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="leading" secondItem="4yL-Gq-bJP" secondAttribute="trailing" constant="8" id="LYO-cX-33y"/>
+                            <constraint firstItem="eV6-Ev-yzK" firstAttribute="top" secondItem="4yL-Gq-bJP" secondAttribute="bottom" constant="8" id="Le4-J6-rQZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Uoe-n6-lIV" secondAttribute="trailing" constant="20" id="N74-iv-VUQ"/>
+                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="leading" secondItem="eV6-Ev-yzK" secondAttribute="trailing" constant="8" id="Ozx-Zc-uPI"/>
+                            <constraint firstItem="4yL-Gq-bJP" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" constant="20" id="PoJ-4w-KSf"/>
                             <constraint firstAttribute="bottom" secondItem="jqg-sy-dxO" secondAttribute="bottom" constant="20" symbolic="YES" id="Uf2-YL-3zF"/>
+                            <constraint firstItem="eV6-Ev-yzK" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" constant="20" id="dXc-Rw-bOm"/>
+                            <constraint firstItem="c4s-Xn-x5B" firstAttribute="top" secondItem="ycB-9Z-8Ca" secondAttribute="bottom" id="fGd-Fq-pds"/>
+                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="top" secondItem="eV6-Ev-yzK" secondAttribute="bottom" constant="8" id="r6s-i3-Wed"/>
+                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="top" secondItem="bfD-tQ-IfD" secondAttribute="bottom" id="zWa-F7-noC"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,7 +89,7 @@
             </objects>
             <point key="canvasLocation" x="-51" y="182"/>
         </scene>
-        <!--class Prefix:identifier Flipside View Controller-->
+        <!--Flipside View Controller-->
         <scene sceneID="z9J-Vg-hzE">
             <objects>
                 <viewController id="kIf-nA-PKG" customClass="JHFlipsideViewController" sceneMemberID="viewController">
