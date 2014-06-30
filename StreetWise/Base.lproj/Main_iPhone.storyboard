@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycB-9Z-8Ca">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </mapView>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqg-sy-dxO">
                                 <rect key="frame" x="278" y="526" width="22" height="22"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -30,65 +34,75 @@
                                     <segue destination="kIf-nA-PKG" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="ZEO-Qe-X3j"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-n6-lIV">
-                                <rect key="frame" x="232" y="20" width="68" height="68"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efr-g6-IOA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-n6-lIV">
+                                        <rect key="frame" x="232" y="20" width="68" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="68" id="4TT-rW-tAP"/>
+                                            <constraint firstAttribute="height" constant="68" id="BIU-X2-kQH"/>
+                                        </constraints>
+                                        <state key="normal" image="search-blue-48">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getSearchResults:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="Jqt-Nh-ZED"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Origin" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4yL-Gq-bJP">
+                                        <rect key="frame" x="20" y="20" width="204" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="9mn-6T-FRj"/>
+                                            <constraint firstAttribute="width" constant="204" id="yXq-dg-llz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Destination" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
+                                        <rect key="frame" x="20" y="58" width="204" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="204" id="3Oe-wM-td8"/>
+                                            <constraint firstAttribute="height" constant="30" id="yHU-RT-Y1W"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="68" id="4TT-rW-tAP"/>
-                                    <constraint firstAttribute="height" constant="68" id="BIU-X2-kQH"/>
+                                    <constraint firstItem="4yL-Gq-bJP" firstAttribute="leading" secondItem="efr-g6-IOA" secondAttribute="leading" constant="20" id="Zqc-R9-e3b"/>
+                                    <constraint firstItem="4yL-Gq-bJP" firstAttribute="top" secondItem="efr-g6-IOA" secondAttribute="top" constant="20" id="bHh-pi-8Ru"/>
                                 </constraints>
-                                <state key="normal" title="Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="searchPaths:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="Uh3-ks-L17"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4yL-Gq-bJP">
-                                <rect key="frame" x="20" y="20" width="204" height="30"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q2O-Ym-zxa">
+                                <rect key="frame" x="0.0" y="108" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="9mn-6T-FRj"/>
-                                    <constraint firstAttribute="width" constant="204" id="yXq-dg-llz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
-                                <rect key="frame" x="20" y="58" width="204" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="204" id="3Oe-wM-td8"/>
-                                    <constraint firstAttribute="height" constant="30" id="yHU-RT-Y1W"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ycB-9Z-8Ca">
-                                <rect key="frame" x="0.0" y="96" width="320" height="472"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </mapView>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="5IU-71-geB">
+                                        <rect key="frame" x="18" y="0.0" width="284" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </slider>
+                                </subviews>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jqg-sy-dxO" secondAttribute="trailing" constant="20" symbolic="YES" id="1ym-A3-aKq"/>
-                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="28D-AB-xRG"/>
-                            <constraint firstItem="4yL-Gq-bJP" firstAttribute="top" secondItem="bfD-tQ-IfD" secondAttribute="bottom" id="6kg-fL-lDv"/>
-                            <constraint firstAttribute="trailing" secondItem="ycB-9Z-8Ca" secondAttribute="trailing" id="Cb8-YC-1ZY"/>
-                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="leading" secondItem="4yL-Gq-bJP" secondAttribute="trailing" constant="8" id="LYO-cX-33y"/>
-                            <constraint firstItem="eV6-Ev-yzK" firstAttribute="top" secondItem="4yL-Gq-bJP" secondAttribute="bottom" constant="8" id="Le4-J6-rQZ"/>
-                            <constraint firstAttribute="trailing" secondItem="Uoe-n6-lIV" secondAttribute="trailing" constant="20" id="N74-iv-VUQ"/>
-                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="leading" secondItem="eV6-Ev-yzK" secondAttribute="trailing" constant="8" id="Ozx-Zc-uPI"/>
-                            <constraint firstItem="4yL-Gq-bJP" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" constant="20" id="PoJ-4w-KSf"/>
+                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="P2M-Nd-gu3"/>
+                            <constraint firstItem="c4s-Xn-x5B" firstAttribute="top" secondItem="ycB-9Z-8Ca" secondAttribute="bottom" id="P94-Ex-que"/>
                             <constraint firstAttribute="bottom" secondItem="jqg-sy-dxO" secondAttribute="bottom" constant="20" symbolic="YES" id="Uf2-YL-3zF"/>
-                            <constraint firstItem="eV6-Ev-yzK" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" constant="20" id="dXc-Rw-bOm"/>
-                            <constraint firstItem="c4s-Xn-x5B" firstAttribute="top" secondItem="ycB-9Z-8Ca" secondAttribute="bottom" id="fGd-Fq-pds"/>
-                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="top" secondItem="eV6-Ev-yzK" secondAttribute="bottom" constant="8" id="r6s-i3-Wed"/>
-                            <constraint firstItem="Uoe-n6-lIV" firstAttribute="top" secondItem="bfD-tQ-IfD" secondAttribute="bottom" id="zWa-F7-noC"/>
+                            <constraint firstAttribute="trailing" secondItem="ycB-9Z-8Ca" secondAttribute="trailing" id="hLU-OH-6Ct"/>
+                            <constraint firstItem="ycB-9Z-8Ca" firstAttribute="top" secondItem="l9E-07-oys" secondAttribute="top" id="vI4-xL-SXf"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="destinationField" destination="eV6-Ev-yzK" id="spK-dI-4Vj"/>
                         <outlet property="mapView" destination="ycB-9Z-8Ca" id="T8J-ck-E0Q"/>
+                        <outlet property="originField" destination="4yL-Gq-bJP" id="jcr-8m-S3A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4L-l5-tyG" sceneMemberID="firstResponder"/>
@@ -133,6 +147,9 @@
             <point key="canvasLocation" x="368" y="182"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="search-blue-48" width="48" height="48"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

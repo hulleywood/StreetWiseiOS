@@ -20,23 +20,60 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+//    [_mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 37.7833;
-    zoomLocation.longitude = -122.4167;
+//    CLLocationCoordinate2D zoomLocation;
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.02);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMake(_mapView.userLocation.coordinate, span);
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+//    if (_mapView.userLocation.location != nil) {
+//        NSLog(@"User location!");
+//        zoomLocation = _mapView.userLocation.location.coordinate;
+//    } else {
+//        NSLog(@"%@", _mapView.userLocation.coordinate);
+//        zoomLocation.latitude = 37.7833;
+//        zoomLocation.longitude = -122.4167;
+//    }
+    
+//    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     
     [_mapView setRegion:viewRegion animated:YES];
+}
+
+- (IBAction)getSearchResults:(id)sender {
+    //    MKCoordinateRegion mapRegion = [_mapView region];
+    //    CLLocationCoordinate2D centerLocation = mapRegion.center;
+    
+    NSString *url = @"http://streetwise.herokuapp.com/directions/show.json";
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{ @"origin": @"1502 hyde st, san francisco",
+                                  @"destination": @"633 folsom st, san mateo" };
+    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSError *e = nil;
+        NSDictionary* json = [NSJSONSerialization
+                              JSONObjectWithData:responseObject
+                              options:0
+                              error:&e ];
+//        NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", json);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+- (void)initiateSearchResultsFromResponse:(NSDictionary *)responseJSON
+{
+    self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
 }
 
 #pragma mark - Flipside View Controller
@@ -78,22 +115,5 @@
     }
 }
 
-- (IBAction)searchPaths:(id)sender {
-//    MKCoordinateRegion mapRegion = [_mapView region];
-//    CLLocationCoordinate2D centerLocation = mapRegion.center;
-    
-    NSString *url = @"http://streetwise.herokuapp.com/directions/show.json";
-        
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        
-    NSDictionary *parameters = @{ @"origin": @"1502 hyde st, san francisco",
-                                      @"destination": @"633 folsom st, san mateo" };
-    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Response: %@", text);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
+
 @end

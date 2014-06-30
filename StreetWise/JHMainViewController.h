@@ -7,6 +7,7 @@
 //
 
 #import "JHFlipsideViewController.h"
+#import "JHDirectionSearchResults.h"
 #import <MapKit/MapKit.h>
 
 @interface JHMainViewController : UIViewController <JHFlipsideViewControllerDelegate, UIPopoverControllerDelegate>
@@ -14,6 +15,11 @@
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-- (IBAction)searchPaths:(id)sender;
+- (IBAction)getSearchResults:(id)sender;
+
+@property (strong, nonatomic) JHDirectionSearchResults *searchResults;
+
+@property (weak, nonatomic) IBOutlet UITextField *originField;
+@property (weak, nonatomic) IBOutlet UITextField *destinationField;
 
 @end
