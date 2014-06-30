@@ -21,9 +21,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.mapView.delegate = self;
-//    self.originField.delegate = self;
-//    self.destinationField.delegate = self;
+    _pathSlider.continuous = YES;
+    [_pathSlider addTarget:self
+               action:@selector(sliderWasMoved:)
+     forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +88,17 @@
     }
 }
 
+- (IBAction)sliderWasMoved:(id)sender {
+    [_pathSlider setValue:((int)((_pathSlider.value + .25))) animated:NO];
+    int pathIndex = (int) _pathSlider.value;
+    NSLog(@"%d", pathIndex);
+    
+    if (pathIndex != self.currentPathIndex) {
+        self.currentPathIndex = pathIndex;
+        [self renderPathOnMap];
+    }
+}
+
 - (void)processSearchResultsFromResponse:(NSDictionary *)responseJSON
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -98,17 +112,23 @@
 
 - (void)renderSearchResults
 {
-    [self clearMapOverlays];
+    self.currentPathIndex = 0;
+    [_pathSlider setValue:self.currentPathIndex animated:NO];
+    
     [self renderEndPoints];
-    [self renderPathOnMap:self.searchResults.paths[0]];
+    [self renderPathOnMap];
     [self resizeMapViewForResults];
     [self displayPathSlider];
 }
 
 - (void)clearMapOverlays
 {
-    [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:self.mapView.overlays];
+}
+
+- (void)clearMapAnnotations
+{
+    [self.mapView removeAnnotations:[self.mapView annotations]];
 }
 
 - (void)renderEndPoints
@@ -117,8 +137,10 @@
     [_mapView addAnnotation:self.searchResults.destination];
 }
 
-- (void)renderPathOnMap:(MKPolyline *)path
+- (void)renderPathOnMap
 {
+    [self clearMapOverlays];
+    MKPolyline *path = self.searchResults.paths[_currentPathIndex];
     [_mapView addOverlay:path level:MKOverlayLevelAboveRoads];
 }
 

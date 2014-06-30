@@ -14,11 +14,16 @@
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
+@property (assign) int currentPathIndex;
+
 @property (nonatomic, retain) MKPolyline *routeLine;
 @property (nonatomic, retain) MKPolylineView *routeLineView;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)getSearchResults:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UISlider *pathSlider;
+- (IBAction)sliderWasMoved:(id)sender;
 
 @property (strong, nonatomic) JHDirectionSearchResults *searchResults;
 
