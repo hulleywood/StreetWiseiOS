@@ -26,6 +26,8 @@
 		A245A1211960FFBF007E7C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A245A11F1960FFBF007E7C35 /* InfoPlist.strings */; };
 		A245A1231960FFBF007E7C35 /* StreetWiseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A245A1221960FFBF007E7C35 /* StreetWiseTests.m */; };
 		A245A12D1961012D007E7C35 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245A12C1961012D007E7C35 /* MapKit.framework */; };
+		A2A18A311961F49900C3E905 /* JHLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A18A301961F49900C3E905 /* JHLocation.m */; };
+		A2A18A331961F73A00C3E905 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A18A321961F73A00C3E905 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		A245A1201960FFBF007E7C35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A245A1221960FFBF007E7C35 /* StreetWiseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreetWiseTests.m; sourceTree = "<group>"; };
 		A245A12C1961012D007E7C35 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A2A18A2F1961F49900C3E905 /* JHLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHLocation.h; sourceTree = "<group>"; };
+		A2A18A301961F49900C3E905 /* JHLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHLocation.m; sourceTree = "<group>"; };
+		A2A18A321961F73A00C3E905 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CD61D7D3131A4CC1B17ACF54 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A18A331961F73A00C3E905 /* AddressBook.framework in Frameworks */,
 				A245A12D1961012D007E7C35 /* MapKit.framework in Frameworks */,
 				A245A0F41960FFBF007E7C35 /* CoreGraphics.framework in Frameworks */,
 				A245A0F61960FFBF007E7C35 /* UIKit.framework in Frameworks */,
@@ -117,6 +123,7 @@
 		A245A0F01960FFBF007E7C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2A18A321961F73A00C3E905 /* AddressBook.framework */,
 				A245A12C1961012D007E7C35 /* MapKit.framework */,
 				A245A0F11960FFBF007E7C35 /* Foundation.framework */,
 				A245A0F31960FFBF007E7C35 /* CoreGraphics.framework */,
@@ -132,16 +139,18 @@
 			children = (
 				A245A1001960FFBF007E7C35 /* JHAppDelegate.h */,
 				A245A1011960FFBF007E7C35 /* JHAppDelegate.m */,
+				A245A10C1960FFBF007E7C35 /* JHFlipsideViewController.h */,
+				A245A10D1960FFBF007E7C35 /* JHFlipsideViewController.m */,
+				A245A10F1960FFBF007E7C35 /* Images.xcassets */,
+				A245A0F81960FFBF007E7C35 /* Supporting Files */,
 				A245A1031960FFBF007E7C35 /* Main_iPhone.storyboard */,
 				A245A1061960FFBF007E7C35 /* Main_iPad.storyboard */,
 				A245A1091960FFBF007E7C35 /* JHMainViewController.h */,
 				A245A10A1960FFBF007E7C35 /* JHMainViewController.m */,
 				A242BDE219612FD5008362E4 /* JHDirectionSearchResults.h */,
 				A242BDE319612FD5008362E4 /* JHDirectionSearchResults.m */,
-				A245A10C1960FFBF007E7C35 /* JHFlipsideViewController.h */,
-				A245A10D1960FFBF007E7C35 /* JHFlipsideViewController.m */,
-				A245A10F1960FFBF007E7C35 /* Images.xcassets */,
-				A245A0F81960FFBF007E7C35 /* Supporting Files */,
+				A2A18A2F1961F49900C3E905 /* JHLocation.h */,
+				A2A18A301961F49900C3E905 /* JHLocation.m */,
 			);
 			path = StreetWise;
 			sourceTree = "<group>";
@@ -309,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A18A311961F49900C3E905 /* JHLocation.m in Sources */,
 				A245A1021960FFBF007E7C35 /* JHAppDelegate.m in Sources */,
 				A245A10B1960FFBF007E7C35 /* JHMainViewController.m in Sources */,
 				A245A10E1960FFBF007E7C35 /* JHFlipsideViewController.m in Sources */,

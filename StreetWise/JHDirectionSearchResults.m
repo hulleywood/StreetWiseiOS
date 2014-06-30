@@ -17,14 +17,15 @@
 - (id)initWithResponse:(NSDictionary *)responseJSON {
     self = [super init];
     if (self) {
-        self.origin = [responseJSON objectForKey:@"origin"];
-        self.destination = [responseJSON objectForKey:@"destination"];
-        
+        NSString *originAddress = [responseJSON objectForKey:@"origin"];
         NSArray *originArray = [self createCoordsArrayFromDict:[responseJSON objectForKey:@"origin_coords"]];
-        self.originCoords = [self createLocationFromPoints:originArray];
+        CLLocationCoordinate2D originLocation = [self createLocationFromPoints:originArray].coordinate;
+        self.origin = [[JHLocation alloc] initWithName:@"Origin" address:originAddress coordinate:originLocation];
         
+        NSString *destinationAddress = [responseJSON objectForKey:@"destination"];
         NSArray *destinationArray = [self createCoordsArrayFromDict:[responseJSON objectForKey:@"destination_coords"]];
-        self.destinationCoords = [self createLocationFromPoints:destinationArray];
+        CLLocationCoordinate2D destinationLocation = [self createLocationFromPoints:destinationArray].coordinate;
+        self.destination = [[JHLocation alloc] initWithName:@"Destination" address:destinationAddress coordinate:destinationLocation];
         
         [self createPolyLines:[responseJSON objectForKey:@"paths"]];
     }

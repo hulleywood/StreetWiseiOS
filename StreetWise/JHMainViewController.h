@@ -10,9 +10,12 @@
 #import "JHDirectionSearchResults.h"
 #import <MapKit/MapKit.h>
 
-@interface JHMainViewController : UIViewController <JHFlipsideViewControllerDelegate, UIPopoverControllerDelegate>
+@interface JHMainViewController : UIViewController <JHFlipsideViewControllerDelegate, UIPopoverControllerDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+
+@property (nonatomic, retain) MKPolyline *routeLine;
+@property (nonatomic, retain) MKPolylineView *routeLineView;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)getSearchResults:(id)sender;

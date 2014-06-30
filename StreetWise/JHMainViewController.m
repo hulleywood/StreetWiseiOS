@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.mapView.delegate = self;
 //    [_mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
 }
 
@@ -66,7 +67,7 @@
 //        NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"Response: %@", json);
         [self initiateSearchResultsFromResponse:json];
-        [self renderPathsOnMap];
+        [self renderSearchResults];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [self renderError:error];
@@ -76,26 +77,42 @@
 - (void)initiateSearchResultsFromResponse:(NSDictionary *)responseJSON
 {
     self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
-    NSLog(@"Origin: %@", self.searchResults.origin);
-    NSLog(@"Destination: %@", self.searchResults.destination);
-    NSLog(@"Origin coords: %@", self.searchResults.originCoords);
-    NSLog(@"Destination coords: %@", self.searchResults.destinationCoords);
-    NSLog(@"Path 0: %@", self.searchResults.paths[0]);
-    NSLog(@"Path 1: %@", self.searchResults.paths[1]);
-    NSLog(@"Path 2: %@", self.searchResults.paths[2]);
-    NSLog(@"Path 3: %@", self.searchResults.paths[3]);
+    NSLog(@"Origin: %@", self.searchResults.origin.subtitle);
+    NSLog(@"Destination: %@", self.searchResults.destination.subtitle);
 }
 
 #pragma mark - Render Methods
 
+- (void)renderSearchResults
+{
+    [self renderEndPoints];
+    [self renderPathsOnMap];
+}
+
+- (void)renderEndPoints
+{
+    [_mapView addAnnotation:self.searchResults.origin];
+    [_mapView addAnnotation:self.searchResults.destination];
+}
+
 - (void)renderPathsOnMap
 {
-    
+    [_mapView addOverlays:self.searchResults.paths level:MKOverlayLevelAboveRoads];
 }
 
 - (void)renderError:(NSError *)error
 {
     
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
+{
+    MKPolylineRenderer *renderer =
+    [[MKPolylineRenderer alloc] initWithOverlay:overlay];
+    UIColor *mapOverlayColor = [UIColor colorWithRed:((float)22 / 255.0f) green:((float)126 / 255.0f) blue:((float)251 / 255.0f) alpha:0.8];
+    renderer.strokeColor = mapOverlayColor;
+    renderer.lineWidth = 13.0;
+    return renderer;
 }
 
 #pragma mark - Flipside View Controller

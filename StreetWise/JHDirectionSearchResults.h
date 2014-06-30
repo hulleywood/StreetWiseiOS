@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "JHLocation.h"
 
 @interface JHDirectionSearchResults : NSObject
 
-@property NSString *origin;
-@property NSString *destination;
-@property CLLocation *originCoords;
-@property CLLocation *destinationCoords;
+@property JHLocation *origin;
+@property JHLocation *destination;
+//@property CLLocation *originCoords;
+//@property CLLocation *destinationCoords;
 @property NSMutableArray *paths;
 
-+ (id)searchResultsWithResponse:(NSDictionary *)responseText;
-- (id)initWithResponse:(NSDictionary *)responseText;
++ (id)searchResultsWithResponse:(NSDictionary *)responseJSON;
+- (id)initWithResponse:(NSDictionary *)responseJSON;
 
 @end
