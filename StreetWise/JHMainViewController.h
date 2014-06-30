@@ -7,9 +7,13 @@
 //
 
 #import "JHFlipsideViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface JHMainViewController : UIViewController <JHFlipsideViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)searchPaths:(id)sender;
 
 @end

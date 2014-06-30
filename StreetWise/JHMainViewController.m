@@ -7,6 +7,9 @@
 //
 
 #import "JHMainViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+
+#define METERS_PER_MILE 1609.344
 
 @interface JHMainViewController ()
 
@@ -24,6 +27,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = 37.7833;
+    zoomLocation.longitude = -122.4167;
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    
+    [_mapView setRegion:viewRegion animated:YES];
 }
 
 #pragma mark - Flipside View Controller
@@ -65,4 +78,22 @@
     }
 }
 
+- (IBAction)searchPaths:(id)sender {
+//    MKCoordinateRegion mapRegion = [_mapView region];
+//    CLLocationCoordinate2D centerLocation = mapRegion.center;
+    
+    NSString *url = @"http://streetwise.herokuapp.com/directions/show.json";
+        
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+    NSDictionary *parameters = @{ @"origin": @"1502 hyde st, san francisco",
+                                      @"destination": @"633 folsom st, san mateo" };
+    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", text);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
 @end

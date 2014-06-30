@@ -40,6 +40,9 @@
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="searchPaths:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="Uh3-ks-L17"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4yL-Gq-bJP">
                                 <rect key="frame" x="20" y="20" width="204" height="30"/>
@@ -84,6 +87,9 @@
                             <constraint firstItem="Uoe-n6-lIV" firstAttribute="top" secondItem="bfD-tQ-IfD" secondAttribute="bottom" id="zWa-F7-noC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="ycB-9Z-8Ca" id="T8J-ck-E0Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4L-l5-tyG" sceneMemberID="firstResponder"/>
             </objects>
