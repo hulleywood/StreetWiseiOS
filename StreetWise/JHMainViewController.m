@@ -21,9 +21,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.mapView.delegate = self;
-//    self.originField.delegate = self;
-//    self.destinationField.delegate = self;
+    _pathSlider.continuous = YES;
+    [_pathSlider addTarget:self
+               action:@selector(sliderWasMoved:)
+     forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,28 +35,34 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    MKCoordinateRegion defaultRegion;
     CLLocationCoordinate2D zoomLocation;
-//    MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.02);
-//    MKCoordinateRegion viewRegion = MKCoordinateRegionMake(_mapView.userLocation.coordinate, span);
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    zoomLocation.latitude = 37.7833;
+    zoomLocation.longitude = -122.4167;
+    defaultRegion.center = zoomLocation;
+    defaultRegion.span = span;
     
-    if (_mapView.userLocation.location != nil) {
-        NSLog(@"User location!");
-        zoomLocation = _mapView.userLocation.location.coordinate;
-    } else {
-        zoomLocation.latitude = 37.7833;
-        zoomLocation.longitude = -122.4167;
-    }
-    
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    
-    [_mapView setRegion:viewRegion animated:YES];
+    [_mapView setRegion:defaultRegion animated:YES];
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
 
 - (IBAction)getSearchResults:(id)sender {
     NSString *url = @"http://streetwise.herokuapp.com/directions/:id";
-    //    MKCoordinateRegion mapRegion = [_mapView region];
-    //    CLLocationCoordinate2D centerLocation = mapRegion.center;
-    
     NSString *origin = self.originField.text;
     NSString *destination = self.destinationField.text;
    
@@ -85,30 +94,44 @@
     }
 }
 
+- (IBAction)sliderWasMoved:(id)sender {
+    [_pathSlider setValue:((int)((_pathSlider.value + .25))) animated:NO];
+    int pathIndex = (int) _pathSlider.value;
+    
+    if (pathIndex != self.currentPathIndex && self.searchResults.paths.count == 4) {
+        self.currentPathIndex = pathIndex;
+        [self renderPathOnMap];
+    }
+}
+
 - (void)processSearchResultsFromResponse:(NSDictionary *)responseJSON
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
     [self renderSearchResults];
-    NSLog(@"Origin: %@", self.searchResults.origin.subtitle);
-    NSLog(@"Destination: %@", self.searchResults.destination.subtitle);
 }
 
 #pragma mark - Render Methods
 
 - (void)renderSearchResults
 {
-    [self clearMapOverlays];
+    self.currentPathIndex = 0;
+    [_pathSlider setValue:self.currentPathIndex animated:NO];
+    
+    [self clearMapAnnotations];
     [self renderEndPoints];
-    [self renderPathOnMap:self.searchResults.paths[0]];
+    [self renderPathOnMap];
     [self resizeMapViewForResults];
-    [self displayPathSlider];
 }
 
 - (void)clearMapOverlays
 {
-    [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:self.mapView.overlays];
+}
+
+- (void)clearMapAnnotations
+{
+    [self.mapView removeAnnotations:[self.mapView annotations]];
 }
 
 - (void)renderEndPoints
@@ -117,8 +140,10 @@
     [_mapView addAnnotation:self.searchResults.destination];
 }
 
-- (void)renderPathOnMap:(MKPolyline *)path
+- (void)renderPathOnMap
 {
+    [self clearMapOverlays];
+    MKPolyline *path = self.searchResults.paths[_currentPathIndex];
     [_mapView addOverlay:path level:MKOverlayLevelAboveRoads];
 }
 
@@ -162,53 +187,18 @@
     [[MKPolylineRenderer alloc] initWithOverlay:overlay];
     UIColor *mapOverlayColor = [UIColor colorWithRed:((float)22 / 255.0f) green:((float)126 / 255.0f) blue:((float)251 / 255.0f) alpha:0.8];
     renderer.strokeColor = mapOverlayColor;
-    renderer.lineWidth = 13.0;
+    renderer.lineWidth = 5.0;
     return renderer;
 }
 
-- (void)displayPathSlider
+- (IBAction)displayAppInfo:(id)sender
 {
-    
+    NSString *infoText = @"StreetWise provides walking directions that take your environment into account using SFGOV Crime Data. To use: enter an origin and destination, click the search button, and when results are returned use the slider at the bottom to choose between safer routes or shorter ones.";
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"About"
+                                                       message:infoText
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
-
-#pragma mark - Flipside View Controller
-
-- (void)flipsideViewControllerDidFinish:(JHFlipsideViewController *)controller
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self.flipsidePopoverController dismissPopoverAnimated:YES];
-    }
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.flipsidePopoverController = nil;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
-        
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
-            self.flipsidePopoverController = popoverController;
-            popoverController.delegate = self;
-        }
-    }
-}
-
-- (IBAction)togglePopover:(id)sender
-{
-    if (self.flipsidePopoverController) {
-        [self.flipsidePopoverController dismissPopoverAnimated:YES];
-        self.flipsidePopoverController = nil;
-    } else {
-        [self performSegueWithIdentifier:@"showAlternate" sender:sender];
-    }
-}
-
-
 @end
