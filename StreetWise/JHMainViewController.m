@@ -35,28 +35,34 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    MKCoordinateRegion defaultRegion;
     CLLocationCoordinate2D zoomLocation;
-//    MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.02);
-//    MKCoordinateRegion viewRegion = MKCoordinateRegionMake(_mapView.userLocation.coordinate, span);
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    zoomLocation.latitude = 37.7833;
+    zoomLocation.longitude = -122.4167;
+    defaultRegion.center = zoomLocation;
+    defaultRegion.span = span;
     
-    if (_mapView.userLocation.location != nil) {
-        NSLog(@"User location!");
-        zoomLocation = _mapView.userLocation.location.coordinate;
-    } else {
-        zoomLocation.latitude = 37.7833;
-        zoomLocation.longitude = -122.4167;
-    }
-    
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    
-    [_mapView setRegion:viewRegion animated:YES];
+    [_mapView setRegion:defaultRegion animated:YES];
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
 
 - (IBAction)getSearchResults:(id)sender {
     NSString *url = @"http://streetwise.herokuapp.com/directions/:id";
-    //    MKCoordinateRegion mapRegion = [_mapView region];
-    //    CLLocationCoordinate2D centerLocation = mapRegion.center;
-    
     NSString *origin = self.originField.text;
     NSString *destination = self.destinationField.text;
    
@@ -91,9 +97,8 @@
 - (IBAction)sliderWasMoved:(id)sender {
     [_pathSlider setValue:((int)((_pathSlider.value + .25))) animated:NO];
     int pathIndex = (int) _pathSlider.value;
-    NSLog(@"%d", pathIndex);
     
-    if (pathIndex != self.currentPathIndex) {
+    if (pathIndex != self.currentPathIndex && self.searchResults.paths.count == 4) {
         self.currentPathIndex = pathIndex;
         [self renderPathOnMap];
     }
@@ -104,8 +109,6 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
     [self renderSearchResults];
-    NSLog(@"Origin: %@", self.searchResults.origin.subtitle);
-    NSLog(@"Destination: %@", self.searchResults.destination.subtitle);
 }
 
 #pragma mark - Render Methods
@@ -184,7 +187,7 @@
     [[MKPolylineRenderer alloc] initWithOverlay:overlay];
     UIColor *mapOverlayColor = [UIColor colorWithRed:((float)22 / 255.0f) green:((float)126 / 255.0f) blue:((float)251 / 255.0f) alpha:0.8];
     renderer.strokeColor = mapOverlayColor;
-    renderer.lineWidth = 13.0;
+    renderer.lineWidth = 5.0;
     return renderer;
 }
 
