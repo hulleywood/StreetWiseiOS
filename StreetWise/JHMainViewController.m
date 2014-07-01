@@ -118,10 +118,10 @@
     self.currentPathIndex = 0;
     [_pathSlider setValue:self.currentPathIndex animated:NO];
     
+    [self clearMapAnnotations];
     [self renderEndPoints];
     [self renderPathOnMap];
     [self resizeMapViewForResults];
-    [self displayPathSlider];
 }
 
 - (void)clearMapOverlays
@@ -191,49 +191,14 @@
     return renderer;
 }
 
-- (void)displayPathSlider
+- (IBAction)displayAppInfo:(id)sender
 {
-    
+    NSString *infoText = @"StreetWise provides walking directions that take your environment into account using SFGOV Crime Data. To use: enter an origin and destination, click the search button, and when results are returned use the slider at the bottom to choose between safer routes or shorter ones.";
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"About"
+                                                       message:infoText
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
-
-#pragma mark - Flipside View Controller
-
-- (void)flipsideViewControllerDidFinish:(JHFlipsideViewController *)controller
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self.flipsidePopoverController dismissPopoverAnimated:YES];
-    }
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.flipsidePopoverController = nil;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
-        
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
-            self.flipsidePopoverController = popoverController;
-            popoverController.delegate = self;
-        }
-    }
-}
-
-- (IBAction)togglePopover:(id)sender
-{
-    if (self.flipsidePopoverController) {
-        [self.flipsidePopoverController dismissPopoverAnimated:YES];
-        self.flipsidePopoverController = nil;
-    } else {
-        [self performSegueWithIdentifier:@"showAlternate" sender:sender];
-    }
-}
-
-
 @end

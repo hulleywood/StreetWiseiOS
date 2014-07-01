@@ -14,8 +14,6 @@
 
 @property JHLocation *origin;
 @property JHLocation *destination;
-//@property CLLocation *originCoords;
-//@property CLLocation *destinationCoords;
 @property NSMutableArray *paths;
 
 + (id)searchResultsWithResponse:(NSDictionary *)responseJSON;

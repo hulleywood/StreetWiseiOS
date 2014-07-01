@@ -6,13 +6,10 @@
 //  Copyright (c) 2014 James Hulley. All rights reserved.
 //
 
-#import "JHFlipsideViewController.h"
 #import "JHDirectionSearchResults.h"
 #import <MapKit/MapKit.h>
 
-@interface JHMainViewController : UIViewController <JHFlipsideViewControllerDelegate, UIPopoverControllerDelegate, MKMapViewDelegate>
-
-@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+@interface JHMainViewController : UIViewController <MKMapViewDelegate>
 
 @property (assign) int currentPathIndex;
 
@@ -29,5 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *originField;
 @property (weak, nonatomic) IBOutlet UITextField *destinationField;
+
+- (IBAction)displayAppInfo:(id)sender;
 
 @end
