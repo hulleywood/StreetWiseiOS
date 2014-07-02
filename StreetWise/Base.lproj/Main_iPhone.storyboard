@@ -44,6 +44,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="locationSearchAutoComplete:" destination="rQl-PL-IFJ" eventType="editingDidEnd" id="UCS-H3-Zg6"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Destination" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV6-Ev-yzK">
                                         <rect key="frame" x="20" y="58" width="204" height="30"/>
@@ -53,6 +56,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="locationSearchAutoComplete:" destination="rQl-PL-IFJ" eventType="editingDidEnd" id="qUx-rH-Ofy"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -140,6 +146,22 @@
                                     <constraint firstAttribute="bottom" secondItem="jqg-sy-dxO" secondAttribute="bottom" constant="15" id="xSX-jS-NCg"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q4L-qe-Nxt">
+                                <rect key="frame" x="20" y="108" width="202" height="231"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="30" id="sTS-VX-7CV">
+                                        <rect key="frame" x="0.0" y="22" width="202" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sTS-VX-7CV" id="pb6-Zi-sE5">
+                                            <rect key="frame" x="0.0" y="0.0" width="202" height="29"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -160,6 +182,7 @@
                         <outlet property="mapView" destination="ycB-9Z-8Ca" id="T8J-ck-E0Q"/>
                         <outlet property="originField" destination="4yL-Gq-bJP" id="jcr-8m-S3A"/>
                         <outlet property="pathSlider" destination="5IU-71-geB" id="RX3-ab-Ol5"/>
+                        <outlet property="tableView" destination="q4L-qe-Nxt" id="16U-FB-JAO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4L-l5-tyG" sceneMemberID="firstResponder"/>

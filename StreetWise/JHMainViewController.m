@@ -7,6 +7,7 @@
 //
 
 #import "JHMainViewController.h"
+#import "AFHTTPSessionManager.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "MBProgressHUD.h"
 
@@ -22,11 +23,18 @@
 {
     [super viewDidLoad];
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.hidden = YES;
+    
     self.mapView.delegate = self;
     _pathSlider.continuous = YES;
     [_pathSlider addTarget:self
                action:@selector(sliderWasMoved:)
      forControlEvents:UIControlEventValueChanged];
+    
+    [_originField addTarget:self action:@selector(locationSearchAutoComplete:) forControlEvents:UIControlEventEditingChanged];
+    [_destinationField addTarget:self action:@selector(locationSearchAutoComplete:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,7 +106,7 @@
     [_pathSlider setValue:((int)((_pathSlider.value + .25))) animated:NO];
     int pathIndex = (int) _pathSlider.value;
     
-    if (pathIndex != self.currentPathIndex && self.searchResults.paths.count == 4) {
+    if (pathIndex != self.currentPathIndex && self.serverSearchResults.paths.count == 4) {
         self.currentPathIndex = pathIndex;
         [self renderPathOnMap];
     }
@@ -107,7 +115,7 @@
 - (void)processSearchResultsFromResponse:(NSDictionary *)responseJSON
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    self.searchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
+    self.serverSearchResults = [JHDirectionSearchResults searchResultsWithResponse:responseJSON];
     [self renderSearchResults];
 }
 
@@ -136,14 +144,14 @@
 
 - (void)renderEndPoints
 {
-    [_mapView addAnnotation:self.searchResults.origin];
-    [_mapView addAnnotation:self.searchResults.destination];
+    [_mapView addAnnotation:self.serverSearchResults.origin];
+    [_mapView addAnnotation:self.serverSearchResults.destination];
 }
 
 - (void)renderPathOnMap
 {
     [self clearMapOverlays];
-    MKPolyline *path = self.searchResults.paths[_currentPathIndex];
+    MKPolyline *path = self.serverSearchResults.paths[_currentPathIndex];
     [_mapView addOverlay:path level:MKOverlayLevelAboveRoads];
 }
 
@@ -171,10 +179,10 @@
     MKCoordinateRegion defaultRegion;
     CLLocationCoordinate2D mapCenter;
     MKCoordinateSpan span;
-    span.latitudeDelta = fabs(self.searchResults.origin.coordinate.latitude - self.searchResults.destination.coordinate.latitude) * 1.25;
-    span.longitudeDelta = fabs(self.searchResults.origin.coordinate.longitude - self.searchResults.destination.coordinate.longitude) * 1.25;
-    mapCenter.latitude = (self.searchResults.origin.coordinate.latitude + self.searchResults.destination.coordinate.latitude)/2.00;
-    mapCenter.longitude = (self.searchResults.origin.coordinate.longitude + self.searchResults.destination.coordinate.longitude)/2.00;;
+    span.latitudeDelta = fabs(self.serverSearchResults.origin.coordinate.latitude - self.serverSearchResults.destination.coordinate.latitude) * 1.25;
+    span.longitudeDelta = fabs(self.serverSearchResults.origin.coordinate.longitude - self.serverSearchResults.destination.coordinate.longitude) * 1.25;
+    mapCenter.latitude = (self.serverSearchResults.origin.coordinate.latitude + self.serverSearchResults.destination.coordinate.latitude)/2.00;
+    mapCenter.longitude = (self.serverSearchResults.origin.coordinate.longitude + self.serverSearchResults.destination.coordinate.longitude)/2.00;;
     defaultRegion.center = mapCenter;
     defaultRegion.span = span;
     
@@ -212,4 +220,72 @@
                                              otherButtonTitles:nil];
     [theAlert show];
 }
+
+#pragma mark - AutoComplete
+
+- (IBAction)locationSearchAutoComplete:(id)sender
+{
+    self.currentlySearchingFor = (UITextField *)sender;
+    [self localSearch:self.currentlySearchingFor.text];
+}
+
+- (void)localSearch:(NSString *)searchTerms
+{
+    if ([searchTerms length] > 0) {
+        self.tableView.hidden = NO;
+    } else {
+        self.tableView.hidden = YES;
+    }
+    
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = searchTerms;
+    request.region = _mapView.region;
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        self.localSearchResults = response.mapItems;
+        [_tableView reloadData];
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.tableView.hidden = YES;
+    
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *cellText = selectedCell.textLabel.text;
+    self.currentlySearchingFor.text = cellText;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return [self.localSearchResults count];
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    // Init cell with desired style
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    // Get appropriate data and put into cell
+    MKMapItem *item = [_localSearchResults objectAtIndex:indexPath.row];
+    NSString *address = [item.placemark.addressDictionary objectForKey:@"Street"];
+    
+    cell.textLabel.text = item.name;
+    cell.detailTextLabel.text = address;
+    
+    // Return cell
+    return cell;
+}
+
 @end

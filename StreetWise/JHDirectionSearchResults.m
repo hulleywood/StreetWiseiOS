@@ -44,7 +44,7 @@
 }
 
 - (MKPolyline *)createPolyLineFromPoints:(NSArray *)pathPoints {
-    int numberOfPoints = pathPoints.count;
+    NSInteger numberOfPoints = pathPoints.count;
     CLLocationCoordinate2D coords[numberOfPoints];
     
     for (int i = 0; i < numberOfPoints; i++) {
