@@ -168,6 +168,17 @@
 
 - (void)resizeMapViewForResults
 {
+    MKCoordinateRegion defaultRegion;
+    CLLocationCoordinate2D mapCenter;
+    MKCoordinateSpan span;
+    span.latitudeDelta = fabs(self.searchResults.origin.coordinate.latitude - self.searchResults.destination.coordinate.latitude) * 1.25;
+    span.longitudeDelta = fabs(self.searchResults.origin.coordinate.longitude - self.searchResults.destination.coordinate.longitude) * 1.25;
+    mapCenter.latitude = (self.searchResults.origin.coordinate.latitude + self.searchResults.destination.coordinate.latitude)/2.00;
+    mapCenter.longitude = (self.searchResults.origin.coordinate.longitude + self.searchResults.destination.coordinate.longitude)/2.00;;
+    defaultRegion.center = mapCenter;
+    defaultRegion.span = span;
+    
+    [_mapView setRegion:defaultRegion animated:YES];
     
 }
 
